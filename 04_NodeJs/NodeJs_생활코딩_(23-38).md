@@ -1,12 +1,42 @@
-# Node.js 23-30
+# Node.js 23-38
+
+## 콘솔에서의 입력값
+
+`node main.js arg1 arg2` 처럼 입력값을 넘겨주면 배열의 2번째 인자부터 저장이 된다. 
+
+> 0번째 원소는 노드가 어디에있는지, 1번째 인자는 실행시킨 파일의 경로를 준다.
+
+## not found 구현
+
+path가 없는 상태를 루트라고 한다.
+
+`var queryData = url.parse(_url, true).query;`
+
+주어진 url정보를 분석하여 객체로 돌려주는데 id, port, herf, path, pathname 등등 여러 정보를 다루기 쉽게 해준다.
+
+> pathname은 path와 다르다. 단지 url의 경로를 나타낼 뿐이며, path는 경로와 쿼리부분 모두를 포함한다.
+
+__404__
+
+더 이상 존재하지 않는 것을 브라우저가 요청했을때  나타낸다.
 
 ## node.js로 파일목록 알아내기
+
 수정, 추가, 삭제를 어떻게 반영할 것 인가
 
 - ./: 현재 디렉토리
 - fs.readdir
 
-> 특정 디렉토리에 있는 파일의 목록을 배열로 만들어서 전달해준다.
+> 특정 디렉토리에 있는 파일의 목록을 **배열**로 만들어서 전달해준다.
+
+```python
+var testFolder = '../data';
+var fs = require('fs');
+
+fs.readdir(testFolder,function(err, filelist){
+  console.log(filelist);
+})
+```
 
 ## 함수
 javascript에서 함수는 값이다.
