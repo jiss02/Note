@@ -575,7 +575,6 @@ var superObj = {superVal: 'super'}
 var subObj = {subVal: "sub"}
 
 var subObj = Object.create(superObj); // 대체재!
-
 ```
 
 새로운 객체를 만드는데 인자로 넘어온 객체를 부모로하는 객체를 만들어줘! 라고 하는 것.
@@ -589,3 +588,293 @@ var subObj = Object.create(superObj); // 대체재!
 `debugger;` 코드를 입력하면 자바스크립트이 동작이 멈춘다.
 
 이 기능을 활용하여 여러가지 실험을 해보고, 객체의 상태가 어떤지를 확인하며 진행하면 좋을 것이다.
+
+# 22강
+
+## 객체 상속의 사용
+
+```javascript
+kim = {
+    name: "kim"
+    first:10, second:20,
+    sum: function(){return this.first+this.second}
+}
+lee = {
+    name: 'lee',
+    first: 10, second:10}
+lee._proto__ = kim;
+// lee객체는 sum이라는 기능이 없지만 kim 객체를 상속받음으로써 사용이 가능하다.
+```
+
+```
+var lee = Object.create(kim)
+lee.name = 'lee';
+lee.first = 10;
+lee.second = 10;
+```
+
+ 이라는 문장으로 대체가능하다. 
+
+# 23강
+
+## 객체와 함수
+
+함수가 그냥 함수일 뿐만 아니라 함수를 호출할 때 new라는 연산자를 붙이면 생성자가 된다.
+
+JS에서 함수는 함수이면서, 객체의 생성자도 될 수 있는 무궁무진한 요소이다.
+
+# 24강
+
+## call
+
+함수의 this 값을 바꿀수 있는 함수.
+
+```javascript
+var kim = {
+    name:'kim', first: 10, second: 10
+}
+
+var lee = {
+    name:'lee', first: 10, second: 20
+}
+function sum(){
+    return this.first+this.second;
+}
+sum.call();
+```
+
+`sum.call()`은 sum이라는 객체를 실행시키겠다는 것이다.
+
+>  이를통해모든 함수는 객체라는 것을 알 수 있다.
+
+모든 함수는 call이라는 메소드를 가지고 있고,
+
+첫번째 인자로 객체를 주면 그 객체에 sum() 메소드가 추가되는 효과를 준다.
+
+두번째인자부터는 호출하려는 함수의 인자값으로 들어간다.
+
+# 25강
+
+## bind
+
+함수를 내부적으로 객체에 고정시키고 싶을 때 사용하는 함수.
+
+call 함수처럼 첫번째 인자에 객체를 주고 두번째 인자부터 사용할 함수의 인자값을 넣어주면 된다.
+
+하지만 call과의 다른점은, call은 실행할때 마다 sum안의 this가 가리키는 객체를 바꾸어주지만,
+
+bind의 경우 실행되는 함수의 this값은 원하는 객체로 고정시키는 새로운 함수를 만들어내는 것이다. 
+
+# 26강
+
+## prototype vs __proto__
+
+JS에서 함수는 객체다.
+
+```
+function Person(){}
+
+는 아래와 같다.
+
+var Person = new Function();
+```
+
+위의 코드에서 보듯, JS에서의 함수는 객체이기 때문에 property를 가질 수 있다.
+
+### proto 와 prototype의 차이점
+
+생성자 함수를 생성할 때 어떤 일이 일어나는지 알아야 차이점을 명확히 구분할 수 있다.
+
+생성자 함수 생성하면,
+
+생성자 함수 객체와 동시에 생성자 함수의 프로토 타입객체가 생성된다. 
+
+이 둘은 서로 연결되어 있으며 constructor와 prototype이라는 속성으로 서로 연결된다.
+
+A라는 생성자 함수를 통해 객체를 만들게 되면, 
+
+객체안에 들어있는 \_\_proto\_\_ 속성은 A의 프로토타입 객체를 가리키게 된다.
+
+proto속성은 부모 객체의 프로토타입 객체를 가리키는 하나의 링크이며,
+
+실행하고자 하는 메소드나 변수가 해당 객체에 없으면 proto가 가리키는 부모의 프로토타입 객체로가 변수나 메소드가 존재하는지 확인하고 실행한다. 
+
+즉 prototype은 constructor와 함께 생성되는 또 하나의 객체이고, \_\_proto__는 상속관계를 연결해주는 하나의 링크이다.
+
+# 27강
+
+## 상속 소개
+
+객체와 객체가 직접 상속할 수도 있고, 클래스나 constructor함수를 통해서 상속을 할 수도 있다.
+
+하지만 클래스로 상속하는 것이 쉽고 안전하니 이를 자주 사용하도록 하자.
+
+```javascript
+class Person{
+    constructor(name, first, second){
+        this.name = name;
+        this.first = first;
+        this.second = second;
+    }
+    
+    sum(){
+        return this.first + this.second
+    }
+}
+
+class PersonPlus extends Person{
+    constructor(name, first, second, third){
+        super(name, first, second);
+        this.third = third;
+    }
+    sum(){
+        return super.sum() + this.third;
+    }
+    
+    avg(){
+        return (this.first + this.second + this.third)/3;
+    }
+}
+```
+
+클래스 내에서의 함수는 프로토타입 객체에 저장된 함수로,
+
+해당 클래스에 속하는 객체들이 공유하는 것이다.
+
+즉, 메모리 낭비가 덜하다!
+
+# 28강
+
+## 부모 생성자 실행
+
+```javascript
+function Person(name, first, second){
+    this.name = name;
+    this.first = first;
+    this.second = second;
+}
+Person.prototype.sum = function(){
+    return this.first + this.second
+}
+
+function PersonPlus(name, first, second, third){
+    Person.call(this, name, first, second); // == super(name, first, second);
+    this.third = third;
+}
+PersonPlus.prototype.avg = function(){
+    return (this.first + this.second + this.third)/3;
+}
+```
+
+PersonPlus의 초기화 부분에서 그냥 Person을 하면 안된다. 
+
+new가 없으니 생성자가 아니라 함수처럼 호출 되는 것이다.
+
+이럴때 `call`함수를 이용하여 중복되는 초기화 부분을 간단하게 줄일 수 있다. 
+
+# 29강
+
+## 부모와 연결하기
+
+```javascript
+function Person(name, first, second){
+    this.name = name;
+    this.first = first;
+    this.second = second;
+}
+Person.prototype.sum = function(){
+    return this.first + this.second
+}
+
+function PersonPlus(name, first, second, third){
+    Person.call(this, name, first, second);
+    this.third = third;
+}
+PersonPlus.prototype.avg = function(){
+    return (this.first + this.second + this.third)/3;
+}
+
+//PersonPlus.prototype.__proto__ = Person.prototype;
+
+var kim = new PersonPlus('kim', 10, 20);
+    console.log(kim.sum());
+```
+
+`Person.call(this, name, first, second);` 는 person 을 호출한 것일 뿐, 서로 연결되어있지 않다.
+
+따라서 kim객체에서 sum() 메소드를 실행한다고 해도 상속으로 연결이 안되어있으니 실행이 불가능하다.
+
+이를 해결하기 위해 `PersonPlus.prototype.__proto__ = Person.prototype;` 코드를 통해 자식의 프로토타입이 부모의 프로토타입을 가리키도록 \_\_proto__를 사용하여 연결해주면 된다. 
+
+object.create()를 통해 연결하는 방법은 아래에서 보도록 하자.
+
+# 30강
+
+## constructor 속성은 무엇인가?
+
+객체가 누구로부터 만들어졌는지  알게해준다.
+
+너의 클래스가 뭐야? 라고 물어보는 것과 비슷한 의미이다.
+
+
+29강의 코드를 참고해보자.
+
+PersonPlus를 따르는 kim이라는 객체를 만들고 kim.constructor를 하면 어떻게 될까?
+
+PersonPlus를 가리킨다. kim에 constructor가 없어 프로토타입으로 가서 이를 찾고,
+
+프로토타입에 있는 constructor를 따라 PersonPlus로 간다.
+
+즉, kim.constructor는 kim이라는 객체를 생성한 생성자를 의미하는 것이다.
+
+```
+이런 것도 가능하다.
+var d = new Date();
+var d2 = new d.constructor
+```
+
+# 31강
+
+## constructor 속성 바로잡기
+
+```javascript
+function Person(name, first, second){
+    this.name = name;
+    this.first = first;
+    this.second = second;
+}
+Person.prototype.sum = function(){
+    return this.first + this.second
+}
+
+function PersonPlus(name, first, second, third){
+    Person.call(this, name, first, second);
+    this.third = third;
+}
+PersonPlus.prototype.avg = function(){
+    return (this.first + this.second + this.third)/3;
+}
+
+PersonPlus.prototype = Object.create(Person.prototype);
+
+var kim = new PersonPlus('kim', 10, 20);
+    console.log(kim.sum());
+```
+
+`PersonPlus.prototype = Object.create(Person.prototype);` 코드로 인해 PersonPlus의 prototype은 PersonPlus가 아니라 Person이 된다. 
+
+완전히 replace되는 것이다.
+
+위의 코드 부분은 밑에처럼 바꿔주면 되는데,
+
+```
+PersonPlus.prototype = Object.create(Person.prototype);
+PersonPlus.prototype.constuctor = PersonPlus;
+PersonPlus.prototype.avg = function(){
+    return (this.first + this.second + this.third)/3;
+}
+```
+
+이 코드도 완벽하지는 않다. avg 메소드를 만드는 코드가 
+
+`__proto__`는 링크만 바꿔주면 되기때문에 간편하다.
