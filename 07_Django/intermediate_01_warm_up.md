@@ -82,6 +82,63 @@ OPTION
 
 
 
+## Httpie
+
+Rest API 서버에 대한 구조나 설계 방법을 알아보기 전에, 클라이언트(사용자)에게 Request를 받아 이에 걸맞는 JSON response를 보낸다는 것을 명심하자.
+
+Httpie는 이런 요청과 응답을 커맨드 라인으로써 구현하는 파이썬 기반의 프로그램이다. 정확히는, **커맨드 라인으로 동작하는 http client이다.** httpie 뿐만 아니라 다른 http client도 다양하게 존재한다. 
+
+### Httpie 명령어
+
+명령어는 http로 시작한다.
+
+```
+http [flags] [method] URL [ITEM [ITEM]]
+```
+
+- flags: 옵션.
+
+- method: http 메소드.
+
+- url: 요청이나 응답의 대상.
+
+- item: 어떤 값을 처리해줘! 라고 할때 보내는 **인자**.
+
+  > GET의 경우 `==` , POST나 PUT의 경우 `=`로 넘겨주 면 된다.
+
+
+__요청 방식__ (옵션)
+
+1. Json 형식의 요청 `--json`
+2. HTML form 형식의 요청 `--form`
+
+### shell에 입력하는 명령어
+
+```python
+# 헤더만 보여준다
+http --header GET "example.com"
+
+# 응답을 간단히 테스트 하기위한 도메인에 GET요청
+http GET httpbin.org/get x==1 y==2
+
+# 포스트 요청
+http --form POST 'httpbin.org/post' x=1 y=2
+```
+
+### 폼형식과 JSON방식의 차이
+
+__--form__
+
+기본적으로 html에서 form으로 전송하는 것과 같다. 응답 헤더를 보면 데이터가 form에 담겨 전송이 되는 것을 확인 할 수 있다.
+
+__--json__
+
+보내지는 데이터 전체가 문자열로 데이터를 주고 받는다. API 서버와 통신을 할 때에는 문자열로써 데이터를 주고받는 다는 것이 확인되는 것이다! 
+
+>  json형식으로 요청을 보냈기 때문에 문자열로 주고 받아 지는 것이다.
+
+  
+
 ## CBV
 
 클래스를 기반으로 한 뷰를 의미한다. 클래스를 통해 상속을 용이하게하고 코드의 중복을 줄여보자.
