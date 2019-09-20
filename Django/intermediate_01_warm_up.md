@@ -185,8 +185,33 @@ __as_view()의 필요성__
 
 장고의 path는 `url의 이름, 함수, url path name` 을 인자로 받는데,  제너릭 뷰를 사용하면 두번째 인자로 함수가 들어가야하는 상황이다. 클래스가 들어가게되면 path 형식에 맞지 않으니 이를 함수로써 표현해주기위해 as_view() 를 사용하는 것이다.
 
-
-
-
-
 ### CBV (3)
+
+그렇다면 폼이나 객체들을 띄울 html은 어떻게 만들어야할까? 물론 이 또한 규칙에 따라 만들어 주어야하며, 마음대로 html 이름을 지으면 안된다. 
+
+```
+(소문자모델명)_list.html
+(소문자모델명)_form.html (create와 update모두)
+(소문자모델명)_detail.html
+(소문자모델명)_confirm_delete.html
+```
+
+__html 이름을 바꿔주고 싶다면?__
+
+클래스에 이렇게 넘겨주자 `template_name = 'classcrud/nameyouwant.html'`
+
+__object_list__
+
+지정한 클래스(모델)로 만들어진 모든 객체들의 목록. 자동으로 해당 모델의 모든 객체들이 위의 이름으로 담긴다.
+
+__object__
+
+지정된 pk값에 맞는 객체 (detail 페이지로 들어갈때 pk에 해당하는 객체가 object라는 이름에 담기는 것이다).
+
+__그럼 서로 다른 객체 목록을 어떻게 구분할 것인가?__
+
+디폴트로 만들어진 이름이 object, object_list 라면 어떻게 구분할 것인가? 
+
+아주 간단하다! 클래스에 이렇게 넘겨주면 된다.
+
+`context_object_name = 'anything_name'` 
