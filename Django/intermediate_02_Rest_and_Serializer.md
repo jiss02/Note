@@ -63,3 +63,82 @@ __REST API__
 
 둘의 방식은 매우 비슷하다는 것을 알 수 있다.
 
+### rest_framework
+
+기본 코드를 완성하고 runserver를 실행하면, DefaultRouter에 의해 API의 가장 기본이 되는 서버페이지로 이동된다.
+
+`GET (url) `: 이 url로 요청하면 원하는 메소드를 실행할 수 있다는 것이다.
+
+__POST__
+
+API 서버 페이지에 글을 작성하는 것은 POST요청과 같다. JSON방식으로 전송된다.
+
+__OPTIONS__
+
+객체에 대한 자세한 내용을 나타내는 페이지
+
+> id값은 사람들이 마음대로 수정하면 안되므로 read_only가 설정이 되어있다.
+
+__read_only 설정__
+
+serializer.py 의 class Meta 밑에 작성해주면된다.
+
+`read_only_fields = ('title',)`
+
+> 읽기전용으로 하고싶은 column 명 추가
+
+### Serializer 실습
+
+크게 다른 것만 살펴보자.
+
+### urls.py
+
+```python
+from django.contrib import admin
+from django.urls import path, include
+from . import views
+from rest_framework.routers import DefaultRouter
+
+# restful framework는 라우터를 통해 url을 결정하는 구나.
+
+router = DefaultRouter()
+# 모델 소문자
+router.register('post', views.PostViewSet)
+
+urlpatterns = [
+    path('', include(router.urls))
+]
+```
+
+### serializer.py
+
+```python
+from .models import Post
+from rest_framework import serializers
+
+# API상의 crud담당
+
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = '__all__'
+        # fields = ['title', 'body']
+        read_only_fields = ('title',)
+```
+
+### views.py
+
+```python
+from django.shortcuts import render
+from .models import Post
+from .serializer import PostSerializer
+from rest_framework import viewsets
+
+# Create your views here.
+# 시리얼라이즈는 cbv임.
+
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+```
+
