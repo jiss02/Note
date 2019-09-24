@@ -34,6 +34,8 @@ num1,num2=swap (num1,num2)
 print(num1,num2)
 ```
 
+
+
 ## Numpy
 
 순서대로 메모리에 할당한다. list의 단점 보완.
@@ -71,6 +73,8 @@ npprint(tempnp)
 - 배열의 n*m 형태만 따온다. 
 
 ... Jupyter notebook을 보도록 하자....
+
+
 
 ## 멀티 프로세싱
 
