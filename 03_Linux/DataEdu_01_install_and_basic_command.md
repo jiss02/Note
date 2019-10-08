@@ -288,3 +288,18 @@ ps의 부모는 bash이다! 내가 수행하는 명령이 bash와 밀접한 관�
 `$ history`
 
 `$ cat .bash_history`
+
+
+
+## 권한 설정
+
+**chmod** 으로 권한을 변경하는 것이 가능하다!
+
+```
+-rw-rw-r-- 1 user user 15 Oct  8 11:05 /tmp/bigfile
+[user@server ~]$ chmod o+w /tmp/bigfile 
+[user@server ~]$ ls -al /tmp/bigfile 
+-rw-rw-rw- 1 user user 15 Oct  8 11:05 /tmp/bigfile
+[user@server ~]$ 
+```
+
