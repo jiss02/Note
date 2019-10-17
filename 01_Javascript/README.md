@@ -1,14 +1,14 @@
 ## JavaScript 필기 공간
 
-### CH 1
+### 기초문법
 
 생활코딩 JavaScript 기초 문법 강의 필기
 
-### CH 2
+### OOP_Basic
 
 생활코딩 JavaScript 객체지향 특강 필기
 
-### CH 3
+### JS_for_web
 
 생활코딩 JavaScript Webn 강의 필기
 
