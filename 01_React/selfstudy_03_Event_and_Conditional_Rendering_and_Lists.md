@@ -1,12 +1,31 @@
 ## Event
 
-하나의 특정한 사건이다. 예를 들어 사용자가 버튼을 눌렀다고 생각해보자. 그럼 이는 하나의 `버튼을 클릭하는 사건`이 되는 것이다.
+하나의 특정한 사건이다. 예를 들어 사용자가 버튼을 눌렀다고 생각해보자. 그럼 이는 하나의 `버튼을 클릭하는 사건`이 되는 것이다. 
 
- ### Event Handler
+> 웹 상에서의 모든 행위이다.
 
-이벤트가 발생하면, 이를 처리하는 역할을 하는 함수이다. `Event Listener`라고도 부르는데, 이벤트가 발생할 때 까지 가만히 듣고있다가 이벤트가 발생하면 이를 처리하기 때문이다.  
+#### 일반적인 사용의 event listener
 
+웹 상에서의 행위들을 다루는 이벤트 리스너들을 살펴보자. 일반적으로 `on+(Event)` 형식으로 많이 쓰인다.
 
+```js
+// 클릭되면 실행된다.
+document.onclick = () => console.log("clicked!")
+// 어떠한 element를 잡아고 싶을 때 getElementBy...를 사용한다.
+document.getElementByTagName('video')[0].onfocus = () => console.log("focused!")
+```
+
+ ### 리액트에서의 Event Handler
+
+이벤트가 발생하면, 이를 처리하는 역할을 하는 함수이다. `Event Listener`라고도 부르는데, 이벤트가 발생할 때 까지 가만히 듣고있다가 이벤트가 발생하면 이를 처리하기 때문이다. 이벤트의 발생여부를 계속 듣고 있어야 하므로, 이는 꼭 필요하다.
+
+1. state 만들기
+
+2. handling 함수 만들기
+
+3. 이벤트가 발생하는 html 태그에서 handling 함수 부르기
+
+   
 
 ## Conditional Rendering
 
