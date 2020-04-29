@@ -3,14 +3,26 @@
 마크다운, 필기 pdf를 업로드하는 공간입니다.
 
 
-### :globe_with_meridians: 01
+### :globe_with_meridians: 프레임워크
 
-웹 개발 관련 카테고리입니다.
+- Django
+- Nodejs
+- React
 
-### :robot: 02
+#### 언어
 
-데이터분석 & 사이언스 관련 카테고리입니다.
+- Javascript
 
-### :computer: 03
+#### 웹 기초
 
-기타 카테고리입니다.
+- HTML&CSS
+
+### :robot: 데이터분석 & 사이언스 
+
+- ML&DL
+
+- R
+
+### :pencil: 기타
+
+- Linux
