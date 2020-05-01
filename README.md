@@ -16,6 +16,8 @@
 #### 웹 기초
 
 - HTML&CSS
+- BoostCourse_WEB
+  - Spring 프레임워크를 이용
 
 ### :robot: 데이터분석 & 사이언스 
 
