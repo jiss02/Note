@@ -2,6 +2,11 @@
 
 마크다운, 필기 pdf를 업로드하는 공간입니다.
 
+### :pencil: 기타 00
+
+- Linux
+- Git
+- Cloud
 
 ### :wrench: 프레임워크 01
 
@@ -21,14 +26,8 @@
 
 ### :robot: 데이터분석 & 사이언스 04
 
-- ML&DL
+- ML&DL (with Python)
 
 - R
 
-### :pencil: 기타 00
 
-- Linux
-
-- Git
-
-- Cloud
