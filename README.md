@@ -7,6 +7,7 @@
 - Linux
 - Git
 - Cloud
+- HTTP
 
 ### :wrench: 프레임워크 01
 
